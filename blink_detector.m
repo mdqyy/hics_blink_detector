@@ -16,8 +16,8 @@ above_thres_str  = char(int8(above_thres)+'0');
 [start_blink_ind,end_blink_ind] = regexp(above_thres_str,'0+1+');
 
 % convert blink indices information to our output
-blink_ind        = [start_blink_ind'; end_blink_ind'];
-nb_blinks        = length(blink_ind);
+blink_ind        = [start_blink_ind', end_blink_ind'];
+nb_blinks        = size(blink_ind,1);
 
 end
 
