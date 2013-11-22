@@ -5,21 +5,19 @@ function [current_blink_inf] = construct_blink_information(video_number,blink_du
 blink_start_ind = blink_duration_inf(:,1);
 blink_duration  = blink_duration_inf(:,2);
 
-% we convert this information into a matrix that contains
-% zero for every frame that doesnt have a blink
-% and one along with the blink duration whenever there is a blink
-blink_inf = zeros(nb_frames,2);
-blink_inf(blink_start_ind,:) = [ones(size(blink_duration)),blink_duration];
-
 % we initialize the output matrix
 current_blink_inf = [];
 
 for i=1:window_length:nb_frames-window_length
 	
+	% we find the indices that are inside the window
+	ind = find(blink_start_ind >= i & blink_start_ind < i + window_length);
+
 	% we calculate the number of blinks in the window
-	blink_count = sum(blink_inf(i:i+window_length-1,2));
+	blink_count = length(ind);
 	% we calculate the mean blink duration in the window
-	mean_blink_duration = mean(blink_inf(i:i+window_length-1,2))/fps;
+	mean_blink_duration = 0;
+	if blink_count~=0, mean_blink_duration = mean(blink_duration(ind))/fps; end
 
 	% we calculate the temporal output matrix. the format is:
 	% [id,blink_count,avg_blink_duration,time,question_number]

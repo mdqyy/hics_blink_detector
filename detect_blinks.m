@@ -8,7 +8,7 @@ window_size = 5;
 window_length = window_size*fps;
 
 % threshold
-threshold = 1900;
+threshold = 22;
 
 % these paths are specifics to the video dataset and the folder we store shapes
 video_path = '/vol/hci2/projects/Aaron/DeceptionVideos/CulturalBenchmarks/CAM2';
@@ -28,32 +28,14 @@ blink_information = [];
 
 for i=1:length(video_list)
 
-	% extract the name as it appears on the file
-	video_name = strtok(video_list(i).name,'.');
+	[nb_blinks,blink_ind,blink_duration_inf,video_name,video_number,nb_frames] = track_blinks(video_list(i).name,video_path,shape_path,threshold);
+
 	disp(video_name)
-
-	% extract video number from the name
-	video_number = extract_video_number(video_name);
-
-	% loads shape 
-	shape = load_shape(shape_path,video_name,video_path);
-
-	% calculates distance from upward to downer eye points
-	eyes_distance = calculate_eyes_distance(shape,video_name);
-
-	% the number of frames can be extracted from the dimension of eyes distance
-	nb_frames = length(eyes_distance);
-
-	% run blink detector and takes number of blink and blink indices as output
-	[nb_blinks,blink_ind] = blink_detector(eyes_distance,threshold);
-
-	% feed eyes distance and blink indices to this function
-	% to calculate true start and end frames
-	[blink_duration_inf] = blink_duration(eyes_distance,blink_ind);
 
 	% construct blink information in the format:
 	% [id,blink_count,avg_blink_duration,time,question_number]
-	current_blink_inf = construct_blink_information(video_number,blink_duration_inf,txt,nb_frames,fps,window_length);
+	current_blink_inf = construct_blink_information(video_number,blink_duration_inf, ...
+													txt,nb_frames,fps,window_length);
 
 	% this information is augmented in output matrix
 	blink_information = [blink_information ; current_blink_inf];
