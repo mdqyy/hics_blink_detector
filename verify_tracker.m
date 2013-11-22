@@ -28,4 +28,5 @@ for i=1:nb_videos
 	new_nb_blinks(i) = track_blinks(file_name,video_path,shape_path,threshold,start_frame);
 end
 
-rms = sqrt(sum((old_nb_blinks-new_nb_blinks).^2)/nb_videos)
+rms = rms_distance(old_nb_blinks,new_nb_blinks)
+

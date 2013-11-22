@@ -7,10 +7,7 @@ function [rms] = calculate_eyes_distance(shape)
     % calculate the dsquare distance between upper and downwer eye points
     % eyes_distance     = sum(squeeze(shape(upper_eye_points,2,:)-shape(downer_eye_points,2,:)).^2);
 
-    % to calculate mean euclidean distance
-    % eyes_distance = pdist2(shape(upper_eye_points,2,:),shape(downer_eye_points,2,:),'euclidean');
-    % mean_eyes_distance = eyes_distance/length(upper_eye_points);
-
-    rms = sqrt(sum((shape(upper_eye_points,2,:)-shape(downer_eye_points,2,:)).^2)/length(upper_eye_points));
+    % calculate root mean squared distance
+    rms = rms_distance(shape(upper_eye_points,2,:),shape(downer_eye_points,2,:));
 
 end
