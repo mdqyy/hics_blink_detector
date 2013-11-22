@@ -2,6 +2,9 @@ function [nb_blinks,blink_ind] = blink_detector(eyes_distance,threshold,start_fr
 
 % we take eyes_distance length as our coordinate frame for frame numbers
 
+if ~exist('start_frame'), start_frame = 1;                     end
+if ~exist('end_frame')  , end_frame   = length(eyes_distance); end
+
 % initialize number of blinks to zero
 nb_blinks = 0;
 

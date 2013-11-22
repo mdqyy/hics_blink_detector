@@ -1,18 +1,38 @@
-function [nb_blinks] = detect_blinks(examples,threshold,shape,video_name)
+clear all
 
-nb_blinks = 0;
+% frames per second for video
+fps = 30.0;
+% window size in seconds 
+window_length = 5;
+% we convert it to frames
+window = window_length*fps;
 
-eyes_distance = calculate_eyes_distance(shape,video_name);
+% threshold
+threshold = 1900;
 
-nb_examples = size(examples,1);
-for i=1:nb_examples
+video_path = '/vol/hci2/projects/Aaron/DeceptionVideos/CulturalBenchmarks/CAM2';
+shape_path = '/vol/bitbucket/ns2212/Shapes/normalized_shapes';
 
-	% We extract the frame information from the matrix examples	
-	start_frame = examples(i,1); end_frame = examples(i,2);
+load('txt.mat')
 
-	% We measure the blinks using our blink detector
-	nb_blinks = nb_blinks + blink_detector(eyes_distance,threshold,start_frame,end_frame);
+video_list = dir([video_path '/*avi']);
+
+blink_information = [];
+
+for i=1:length(video_list)
+
+	video_name = strtok(video_list(i).name,'.')
+	video_number = str2num(regexp(video_name,'\d*','match','once'))
+
+	shape = load_shape(shape_path,video_name,video_path);
+	eyes_distance = calculate_eyes_distance(shape,video_name);
+	[nb_blinks,blink_ind] = blink_detector(eyes_distance,threshold);
+	[blink_duration_inf] = blink_duration(eyes_distance,threshold);
+
+	current_blink_inf = construct_blink_information(video_number,blink_duration_inf,dataset,length(eyes_distance),fps,window_length);
+
+	blink_information = [blink_information ; current_blink_inf];
 
 end
 
-end
+save('blink_information.mat','blink_information')

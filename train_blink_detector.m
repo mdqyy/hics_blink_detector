@@ -25,8 +25,8 @@ for i=1:length(threshold_range)
 			disp('video corrupted')
 		else
 			disp(video_name)
-			true_positive = detect_blinks(positive_examples,threshold,shape,video_name);
-			false_positive = detect_blinks(negative_examples,threshold,shape,video_name);
+			true_positive = identify_blinks(positive_examples,threshold,shape,video_name);
+			false_positive = identify_blinks(negative_examples,threshold,shape,video_name);
 
 			nb_examples = size(positive_examples,1);
 			confusion_matrix = confusion_matrix + [true_positive,nb_examples-true_positive;false_positive,nb_examples-false_positive];
