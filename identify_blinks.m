@@ -1,7 +1,9 @@
 function [nb_blinks] = identify_blinks(examples,threshold,shape,video_name)
 
+% initialize number of blinks to zero
 nb_blinks = 0;
 
+% calculate the difference from upper to downer eye points
 eyes_distance = calculate_eyes_distance(shape,video_name);
 
 nb_examples = size(examples,1);

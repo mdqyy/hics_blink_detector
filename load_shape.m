@@ -6,7 +6,8 @@ function [shape] = load_shape(shape_path,video_name,video_path)
 
     % this is specific to the name of the variable that in the mat file
     shape = normalized_shape;
-    
+
     % if shape path is empty we have to track the video
+    % this is to come we need to add CMU tracker basically
 
 end

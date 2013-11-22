@@ -1,9 +1,6 @@
-function [blink_duration_inf] = blink_duration(eyes_distance,threshold,start_frame,end_frame)
+function [blink_duration_inf] = blink_duration(eyes_distance,blink_ind)
 
-if ~exist('start_frame'), start_frame = 1;                     end
-if ~exist('end_frame')  , end_frame   = length(eyes_distance); end
-
-[nb_blinks,blink_ind] = blink_detector(eyes_distance,threshold,start_frame,end_frame);
+nb_blinks = size(blink_ind,1);
 
 % initialize output matrix. The dimensions will be the same as blink ind
 % since we want to calculate the true start and duration of the blink
@@ -16,7 +13,6 @@ filtered_signal = filter_signal(eyes_distance,windowSize);
 for i=1:nb_blinks
 
 	% we extract start and end frame information from blink ind
-	% NOTE that these are different from start and end frame we pass as arguments
 	start_frame = blink_ind(i,1); end_frame = blink_ind(i,2);
 
 	% we find the maximum in both directions and take that as the start and end of the blink
