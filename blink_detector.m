@@ -17,7 +17,7 @@ above_thres_str  = char(int8(above_thres)+'0');
 
 % we recognize a blink everytime eyes_distance falls below threshold and then goes up again
 % the output is the start and end indices of the blinks we detect.
-[start_blink_ind,end_blink_ind] = regexp(above_thres_str,'0+1+');
+[start_blink_ind,end_blink_ind] = regexp(above_thres_str,'0+1');
 
 % convert blink indices information to our output
 blink_ind        = [start_blink_ind', end_blink_ind'];
