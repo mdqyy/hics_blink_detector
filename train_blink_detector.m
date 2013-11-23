@@ -5,7 +5,7 @@ normalized_shape_path = '/vol/bitbucket/ns2212/Shapes/normalized_shapes';
 dataset_path = '../Proposed system';
 video_path = [];
 confusion_matrix = zeros(2);
-threshold_range = [10:1:40];
+threshold_range = [10:5:40];
 corrupted_videos = [80,87,88,96,102,103,107:110,123,127,131,132,134];
 
 % LOAD DATASET

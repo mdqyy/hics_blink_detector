@@ -1,4 +1,4 @@
-function [rms] = calculate_eyes_distance(shape)
+function [eyes_distance] = calculate_eyes_distance(shape)
 	
 	% these points are specific to the tracker you use. FOR CMU TRACKER:
 	upper_eye_points  = [21,22,27,28];
@@ -8,6 +8,6 @@ function [rms] = calculate_eyes_distance(shape)
     % eyes_distance     = sum(squeeze(shape(upper_eye_points,2,:)-shape(downer_eye_points,2,:)).^2);
 
     % calculate root mean squared distance
-    rms = rms_distance(shape(upper_eye_points,2,:),shape(downer_eye_points,2,:));
-
+    eyes_distance = rms_distance(shape(upper_eye_points,2,:),shape(downer_eye_points,2,:),1);
+    
 end

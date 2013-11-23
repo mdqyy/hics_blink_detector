@@ -15,7 +15,7 @@ eyes_distance = calculate_eyes_distance(shape);
 % if start and end frame are undefined we track all the video
 if ~exist('start_frame'), start_frame = 1;                     end
 if ~exist('end_frame')  , end_frame   = length(eyes_distance); end
-	
+
 % the number of frames can be extracted from the dimension of eyes distance
 nb_frames = length(eyes_distance);
 

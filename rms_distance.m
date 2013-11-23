@@ -1,5 +1,11 @@
-function [rms] = rms_distance(vector_a,vector_b) 
+function [rms] = rms_distance(matrix_a,matrix_b,dm_of_variables) 
 
-rms = sqrt( sum( (vector_a - vector_b).^2) / length(vector_a) );
+% we have to include the case of inequal matrices
+
+% calculate number of variables
+if ~exist('dm_of_variables'), nb_variables = length(matrix_a); 
+else nb_variables = size(matrix_a,dm_of_variables); end
+
+rms = sqrt( sum( (matrix_a - matrix_b).^2) / nb_variables );
 
 end
