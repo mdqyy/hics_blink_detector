@@ -21,10 +21,10 @@ for i=1:window_length:nb_frames-window_length
 
 	% we calculate the temporal output matrix. the format is:
 	% [id,blink_count,avg_blink_duration,time,question_number]
-	temp = [video_number,blink_count,mean_blink_duration,i/fps,txt(video_number).questions_frames2(i)];
+	temp_blink_inf = [video_number,blink_count,mean_blink_duration,i/fps,txt(video_number).questions_frames2(i)];
 	
 	% we augment the output matrix and we continue
-	current_blink_inf = [current_blink_inf;temp];
+	current_blink_inf = [current_blink_inf;temp_blink_inf];
 
 end
 
