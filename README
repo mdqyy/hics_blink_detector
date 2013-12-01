@@ -1,1 +1,52 @@
+HICS blinks detector readme file
+
 This is a blink detector we created for HICS conference
+
+The main function to track_blinks in a video is track_blinks
+
+A good function to start with is track_example which demonstates
+the use of the function track_blnks with an example
+
+There are some important observations to make
+
+IN THIS FUNCTION
+result] = CMU_tracker(video_path,start_frame,end_frame)
+
+YOU HAVE TO CHANGE THIS LINE
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% imports the path to the CMU code
+addpath('~/Dropbox/Research/Code/SUPERVISED-DESCENT/')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+so that it points to the folder you have CMU tracker
+
+To use this file you need to know two important dependencies:
+
+DEPENDENCY ONE:
+
+TRACKER
+
+This work is based on top of the work that was done in Carnegie Mellon 
+university under the name Supervised-Descent by Xuehan Xiong
+Reference: http://www.ri.cmu.edu/pub_files/2013/5/main.pdf
+
+IN CASE you want to use another tracker there are some things you have to change
+
+[shape] = facial_feature_extraction(shape_path,video_path,tracker,start_frame,end_frame)
+[upper_eye_points,downer_eye_points] = extract_eyes_indices(tracker)
+
+DEPENDENCY TWO:
+
+DATABASE
+
+This code has been developed using Cultural Benchmarks database but it can easily
+be generalised to another database. The main function that needs altering is:
+
+[video_name,video_number] = extract_video_information(video_path,database);
+
+SPEAKING FOR DATABASES
+
+detect_blinks.m shows an example of tracking an entire database and gathering
+informations that can be used to analyse blinks in all videos
+

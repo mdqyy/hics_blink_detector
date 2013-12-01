@@ -1,4 +1,19 @@
 function [blink_duration_inf] = blink_duration(eyes_distance,blink_ind)
+%
+% INPUT:  eyes_distance       is a vector that represents the distance
+%                             between upper and downer eye points
+%
+%         blink_ind           is a two columns matrix, the first column
+%                             of which represents the start frame of the 
+%                             blink and the second the end.
+%
+% OUTPUT: blink_duration_inf  is a column vector where each row represents
+%                             the duration for each blink in blink ind
+%
+%
+%
+% Author: Nick Sorros
+% email:  nsorros@gmail.com
 
 nb_blinks = size(blink_ind,1);
 

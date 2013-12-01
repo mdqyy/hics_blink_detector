@@ -1,6 +1,7 @@
 clear all
 
 addpath('tools/')
+addpath('eyes_localisation/')
 
 % frames per second for video
 fps = 30.0;
@@ -17,7 +18,7 @@ video_dir = '/vol/hci2/projects/Aaron/DeceptionVideos/CulturalBenchmarks/CAM2';
 shape_dir = '/vol/bitbucket/ns2212/Shapes/shapes';
 extension = 'avi';
 tracker   = 'cmu';
-aam_path  = ''; 
+aam_path  = '~/Dropbox/Research/Code/AAM/trainset/trained_precompute_p.mat'; 
 txt_path = '.';
 database = 'cultural-benchmarks';
 
@@ -40,9 +41,11 @@ for i=1:length(video_list)
 	% extract the video name and number from the video path
 	[video_name,video_number] = extract_video_information(video_path,database);
 
+	% constructs the shape path if exists
 	mat = dir([shape_dir '/' video_name '*.mat']);
 	if isempty(mat), shape_path = []; else shape_path = [shape_dir '/' mat.name]; end
 
+	% main function to track blink count and duration
 	[nb_blinks,blink_ind,blink_duration_inf,nb_frames] = track_blinks(video_path,shape_path,aam_path,threshold,tracker,[],[]);
 
 	disp(video_name)

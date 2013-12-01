@@ -19,7 +19,7 @@ function [shape] = facial_feature_extraction(shape_path,video_path,tracker,start
 	    
     	% if start and end frame are undefined we track all the video
 		if isempty(start_frame), start_frame = 1;             end
-		if isempty(end_frame)  , end_frame   = size(shape,3); end
+		if isempty(end_frame)  , end_frame   = length(result);end
 
 
     	% we convert the result of cmu tracker to a matrix

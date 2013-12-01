@@ -1,6 +1,6 @@
 function [video_name,video_number] = extract_video_information(video_path,database)
 
-	if strmcmp(datbase,'cultural-benchmarks')
+	if strcmp(database,'cultural-benchmarks')
 
 		% regular expression that extracts the video name from video path
 		video_name = regexp(video_path,'[\w\-]+\d{3}','match','once')
