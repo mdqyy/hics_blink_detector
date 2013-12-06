@@ -41,12 +41,13 @@ DEPENDENCY TWO:
 DATABASE
 
 This code has been developed using Cultural Benchmarks database but it can easily
-be generalised to another database. The main function that needs altering is:
+be generalised to another database. The main functions that needs altering is:
 
 [video_name,video_number] = extract_video_information(video_path,database);
+[question_number] = extract_question_number(database,video_number,i)
 
 SPEAKING FOR DATABASES
 
-detect_blinks.m shows an example of tracking an entire database and gathering
+track_database.m is the MAIN script to track a database
 informations that can be used to analyse blinks in all videos
 

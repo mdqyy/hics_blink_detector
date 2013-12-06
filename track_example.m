@@ -1,6 +1,8 @@
 clear all
 
 addpath('tools/')
+addpath('eyes_localisation/')
+addpath('feature_extraction/')
 
 % threshold
 threshold = 19;
