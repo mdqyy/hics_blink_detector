@@ -41,7 +41,7 @@ for i=1:length(video_list)
 
 	% extract the video name and number from the video path
 	[video_name,video_number] = extract_video_information(video_path,database);
-
+    
 	% constructs the shape path if exists
 	[shape_path] = extract_shape_information(shape_dir,video_name);
 

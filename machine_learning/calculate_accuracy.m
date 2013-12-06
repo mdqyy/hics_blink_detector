@@ -1,8 +1,11 @@
-function [ accuracy ] = calculate_accuracy( blink_matrix,indices, threshold, tracker, aam_path )
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+function [ blink_accuracy blink_duration_accuracy] = calculate_accuracy( blink_matrix,indices, threshold, tracker, aam_path )
 
+    nb_examples = length(indices);
 
+    targets              = zeros(nb_examples,1);
+    predictions          = zeros(nb_examples,1);
+    blink_duration_error = zeros(nb_examples,1);
+    
     for j=1:length(indices)
 
         disp(j)
@@ -15,17 +18,21 @@ function [ accuracy ] = calculate_accuracy( blink_matrix,indices, threshold, tra
             
         targets(j) = target;
             
-        nb_blinks = track_blinks(video_path,shape_path,aam_path,threshold,tracker,start_frame,end_frame);
+        [nb_blinks blink_duration] = track_blinks(video_path,shape_path,aam_path,threshold,tracker,start_frame,end_frame);
 
-        predictions(j) = round( sigmf( nb_blinks,[1 1] ) );
-
+        predictions(j) = min( nb_blinks,1 ) ;
+        
+        if nb_blinks > 0,
+            blink_duration_error(j) = sum( ( [start_frame end_frame] - blink_duration( 1,:) ) .^2 );
+        end
+        
     end
 
     confusion = create_confusion_matrix(targets,predictions);
         
-    accuracy = confusion_to_accuracy(confusion);
+    blink_accuracy = confusion_to_accuracy(confusion);
         
-
+    blink_duration_accuracy = sqrt( sum( blink_duration_error ) );
 
 end
 
